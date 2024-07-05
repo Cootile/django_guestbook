@@ -6,11 +6,16 @@
   <title>留言板</title>
 </head>
 <body>
+    <a href="{% url 'msg_list' %}">首頁</a>
     <a href="{% url 'msg_create' %}">新增留言</a>
-    {% if not user.is_authenticated %}
-        <a href="{% url 'login' %}">登入</a>
+    {% if user.is_authenticated %}
+      您好 {{ user.username }} 
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">登出</button>
+      </form>
     {% else %}
-        您好 {{ user.username }}
+      <a href="{% url 'login' %}">登入</a>
     {% endif %}
   <div>
     {% block content %}{% endblock %}

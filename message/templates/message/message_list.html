@@ -4,7 +4,12 @@
     <h1>留言列表</h1>
     <ul>
         {% for msg in message_list %}
-        <li>{{ msg.created }} - <a href="{% url 'msg_read' msg.id %}">{{ msg.subject }}</a> BY {{ msg.user }}</li> <!-- List Item -->
+        <li>
+            {{ msg.created }} - <a href="{% url 'msg_read' msg.id %}">{{ msg.subject }}</a> BY {{ msg.user }}
+            {% if user.is_authenticated %}
+            <a href="{% url 'msg_delete' msg.id %}">刪除</a>
+            {% endif %}
+        </li> <!-- List Item -->
         {% endfor %}
     </ul>
 {% endblock %}
