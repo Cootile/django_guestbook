@@ -10,4 +10,5 @@ class Message(models.Model):
     created = models.DateTimeField('留言時間', auto_now_add=True)
     # updated = models.DateTimeField('最後修改時間', auto_now=True)
 
-    
+    def __str__(self):
+        return self.subject
